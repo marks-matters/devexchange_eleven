@@ -1,0 +1,55 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Rewards",
+		"_postman_id": "1addc11d-3577-b845-3de9-802852e4eaf7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rewards Accounts",
+			"request": {
+				"url": "{{base_url}}/rewards/accounts/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json; v=1",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "List Rewards Accounts"
+			},
+			"response": []
+		},
+		{
+			"name": "Rewards Account Details",
+			"request": {
+				"url": "{{base_url}}/rewards/accounts/REWARDS_ACCOUNT_REFERENCE_ID",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json; v=1",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "List Rewards Account Details"
+			},
+			"response": []
+		}
+	]
+}
