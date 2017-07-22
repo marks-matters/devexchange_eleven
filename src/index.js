@@ -142,6 +142,9 @@ var handlers = {
         speechOutput = 'Goodbye';
         this.emit(':tell', speechOutput);
     },
+    
+    //////////////////////////////
+    
 	'GetPointsIntent': function () {
         var accumulatedPoints = usersPoints();
         speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " Capital One rewards points.";
