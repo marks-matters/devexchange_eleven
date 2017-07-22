@@ -1,0 +1,23 @@
+Intents and Utterances
+
+
+1. GetPointsIntent
+
+Utterances:
+How many points do I have
+How many reward points do I have
+Tell me how many points I have
+Tell me how many reward points I have
+What is my reward status
+
+
+
+2. GetRewardsIntent
+
+Utterances:
+what rewards can I get
+what rewards am I eligible for
+tell me what rewards I can get
+tell me what rewards I am eligible for
+what can I get with my points
+
