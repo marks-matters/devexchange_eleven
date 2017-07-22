@@ -99,8 +99,8 @@ var qualifyingRewards = [];
 
 var speechOutput = '';
 var reprompt;
-var welcomeOutput = "Welcome to Capital One's Rewards Plan. Your access to personalized advice on how to spend and save your rewards. Ask how many rewards you have or how many points to your next reward.";
-var welcomeReprompt = "You can find out how many points you have or discover what you can get by accumulating more points. Ask how many rewards you have or how many points to your next reward.";
+var welcomeOutput = "Welcome to Capital One's Rewards Capitalizer. Your access to personalized advice on how to spend and save your rewards. Ask how many points you have or what you can do with them.";
+var welcomeReprompt = "You can find out how many points you have or discover what you can get by accumulating more points. Ask how many points you have or what you can do with them.";
 
 const appId = ''; // TODO insert App ID here
 const AWSregion = 'us-east-1';
@@ -142,6 +142,11 @@ var handlers = {
         speechOutput = 'Goodbye';
         this.emit(':tell', speechOutput);
     },
+	'GetAccountsListIntent': function () {
+        speechOutput = "You have a Visa and a Platinum Visa account.";
+        reprompt = "";
+        this.emit(':ask', speechOutput, reprompt);
+    },
 	'GetPointsIntent': function () {
         var accumulatedPoints = usersPoints();
         speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " Capital One rewards points.";
@@ -158,7 +163,7 @@ var handlers = {
         var accumulatedPoints = usersPoints();
         var userAwards = usersRewards();
         var deficitPoints = deficitRewardPoints();
-        speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " reward points, you can get " + userAwards[0] + " or " + userAwards[1] + ". If you accumulate " + deficitPoints.toLocaleString('en-US') + " more points you can get " + userAwards[2];
+        speechOutput = "With your " + accumulatedPoints.toLocaleString('en-US') + " reward points, you can get " + userAwards[0] + " or " + userAwards[1] + ". Based on your previous purchases, may I recommend "  + userAwards[2] + ", you only need " + deficitPoints.toLocaleString('en-US')  + " more points.";
         this.emit(':tell', speechOutput);
     }
 };
