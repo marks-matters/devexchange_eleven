@@ -1,0 +1,107 @@
+var data [
+{
+    "reward": {
+       "type": "flight",
+       "destination": "Denver",
+       "points": 25000,
+     },
+   },
+   {
+     "reward": {
+        "type": "flight",
+        "destination": "Denver",
+        "points": 25000,
+      },
+    },
+    {
+      "reward": {
+         "type": "flight",
+         "destination": "Denver",
+         "points": 25000,
+       },
+     },
+     {
+       "reward": {
+          "type": "flight",
+          "destination": "Seattle",
+          "points": 45000,
+        },
+      },
+      {
+        "reward": {
+           "type": "flight",
+           "destination": "Los Angeles",
+           "points": 50000,
+         },
+       },
+       {
+         "reward": {
+            "type": "restaurant",
+            "destination": "PePe la Pew",
+            "points": 3500,
+          },
+        },
+        {
+          "reward": {
+             "type": "restaurant",
+             "destination": "Welly's",
+             "points": 2000,
+           },
+         },
+         {
+           "reward": {
+              "type": "restaurant",
+              "destination": "Wildwood",
+              "points": 4000,
+            },
+          },
+          {
+            "reward": {
+               "type": "restaurant",
+               "destination": "Bolton Tarven",
+               "points": 1000,
+             },
+           },
+           {
+             "reward": {
+                "type": "Day Spa",
+                "destination": "Body Love",
+                "points": 10000,
+              },
+            },
+            {
+              "reward": {
+                 "type": "Day Spa",
+                 "destination": "Mistress Love",
+                 "points": 15000,
+               },
+             },
+             {
+               "reward": {
+                  "type": "Day Spa",
+                  "destination": "Creature Comforts",
+                  "points": 13000,
+                },
+              },
+              {
+                "reward": {
+                   "type": "Gift Card",
+                   "destination": "Home Depot",
+                   "points": 7000,
+                 },
+               },
+               {
+                 "reward": {
+                    "type": "Gift Card",
+                    "destination": "Amazon",
+                    "points": 8000,
+                  },
+                },
+                {
+                  "reward": {
+                     "type": "Gift Card",
+                     "destination": "Tiffany's",
+                     "points": 9000,
+                   },
+                 },
+]
