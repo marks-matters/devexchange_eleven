@@ -29,7 +29,7 @@ var data = [
          "destination": "Denver",
          "points": 25000,
        },
-   },];
+   }];
 
 var points = 24800;
 
@@ -85,14 +85,14 @@ var handlers = {
         this.emit(':tell', speechOutput);
     },
     'GetPointsToNextMilestone': function () {
-        speechOutput = "";
-        reprompt = "";
-        this.emit(':ask', speechOutput, reprompt);
+        speechOutput = "You need " + deficitRewards.toLocaleString('en-US') + " more points you can get a gift card for Tiffany's.";
+        this.emit(':tell', speechOutput);
     },
     'GetRewardsIntent': function () {
-        speechOutput = "";
-        reprompt = "";
-        this.emit(':ask', speechOutput, reprompt);
+        var accumulatedPoints = usersPoints();
+        var deficitRewards = nextReward();
+        speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " reward points, you can get a flight to Los Angeles or a spa treatment at Mistress Love. If you accumulate " + deficitRewards.toLocaleString('en-US') + " more points you can get a gift card for Tiffany's.";
+        this.emit(':tell', speechOutput);
     }
 };
 
@@ -111,4 +111,8 @@ function usersRewards () {
             qualifyingRewards += reward;
         }
     });
+}
+
+function nextReward() {
+    return (points - 1100);
 }
