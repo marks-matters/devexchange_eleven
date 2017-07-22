@@ -91,7 +91,7 @@ var data = [
 }
 ];
 
-var userRewardPoints = getRandomInt(1000, 100000);
+var userRewardPoints = getRandomInt(1000, 50000);
 var nextRewardRequiredPoints;
 var qualifyingRewards = [];
 
@@ -120,6 +120,9 @@ exports.handler = function(event, context, callback) {
 };
 
 var handlers = {
+
+	////////////  Standard Intents  ///////////////
+	
     'LaunchRequest': function () {
           this.emit(':ask', welcomeOutput, welcomeReprompt);
     },
@@ -140,6 +143,9 @@ var handlers = {
         speechOutput = 'Goodbye';
         this.emit(':tell', speechOutput);
     },
+    
+    ///////////  App-specific Intents  ////////////
+    
 	'GetAccountsListIntent': function () {
         speechOutput = "You have a Visa and a Platinum Visa account.";
         reprompt = "";
