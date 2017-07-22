@@ -140,17 +140,11 @@ var handlers = {
         speechOutput = 'Goodbye';
         this.emit(':tell', speechOutput);
     },
-<<<<<<< HEAD
 	'GetAccountsListIntent': function () {
         speechOutput = "You have a Visa and a Platinum Visa account.";
         reprompt = "";
         this.emit(':ask', speechOutput, reprompt);
     },
-=======
-    
-    //////////////////////////////
-    
->>>>>>> 5d0710b8ce33d4e67eacf8f27e25477b1448a780
 	'GetPointsIntent': function () {
         var accumulatedPoints = usersPoints();
         speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " Capital One rewards points.";
