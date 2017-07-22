@@ -8,6 +8,31 @@
 
  // 1. Text strings =====================================================================================================
 
+var data = [
+    {
+    "reward": {
+       "type": "flight",
+       "destination": "Denver",
+       "points": 25000,
+     },
+   },
+   {
+     "reward": {
+        "type": "flight",
+        "destination": "Denver",
+        "points": 25000,
+      },
+    },
+    {
+      "reward": {
+         "type": "flight",
+         "destination": "Denver",
+         "points": 25000,
+       },
+   },];
+
+var points = 24800;
+
 var speechOutput = '';
 var reprompt;
 var welcomeOutput = "Welcome to Capital One's Rewards Plan. Your access to personalized advice on how to spend and save your rewards. Ask how many rewards you have or how many points to your next reward.";
@@ -54,9 +79,10 @@ var handlers = {
         this.emit(':tell', speechOutput);
     },
 	'GetPointsIntent': function () {
-        speechOutput = "You can got ";
-        reprompt = "";
-        this.emit(':ask', speechOutput, reprompt);
+        var accumulatedPoints = usersPoints();
+        console.log(data[1].reward.type);
+        speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " Capital One rewards points.";
+        this.emit(':tell', speechOutput);
     },
     'GetPointsToNextMilestone': function () {
         speechOutput = "";
@@ -71,3 +97,18 @@ var handlers = {
 };
 
 // 3. Functions  =================================================================================================
+
+function usersPoints() {
+    return points;
+}
+
+function usersRewards () {
+    var loops = 0;
+    var qualifyingRewards = [];
+    Object.keys(data.starSignDates).some( function(reward) {
+        if( qualifiesForReward(reward) && loops < 2) {
+            loops += 1;
+            qualifyingRewards += reward;
+        }
+    });
+}

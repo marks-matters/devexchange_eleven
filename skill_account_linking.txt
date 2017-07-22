@@ -1,0 +1,9 @@
+Account Linking
+
+https://api-sandbox.capitalone.com/oauth2/authorize
+
+3acee71ce6904d8abcdccf8bae814caf
+
+read_rewards_account_info
+
+https://api-sandbox.capitalone.com/oauth2/token
