@@ -9,29 +9,93 @@
  // 1. Text strings =====================================================================================================
 
 var data = [
-    {
-    "reward": {
-       "type": "flight",
-       "destination": "Denver",
-       "points": 25000,
-     },
-   },
-   {
-     "reward": {
-        "type": "flight",
-        "destination": "Denver",
-        "points": 25000,
-      },
-    },
-    {
-      "reward": {
-         "type": "flight",
-         "destination": "Denver",
-         "points": 25000,
-       },
-   }];
+{
+"type": "a flight to",
+"destination": "Denver",
+"points": 25000
+},
+{
+"type": "a flight to",
+"destination": "Orlando",
+"points": 25000
+},
+{
+"type": "a flight to",
+"destination": "New York",
+"points": 25000
+},
+{
+"type": "a flight to",
+"destination": "Seattle",
+"points": 45000
+},
+{
+"type": "a flight to",
+"destination": "Los Angeles",
+"points": 50000
+},
+{
+"type": "dinner at",
+"destination": "PePe la Pew",
+"points": 3500
+},
+{
+"type": "dinner at",
+"destination": "Welly's",
+"points": 2000
+},
+{
+"type": "dinner at",
+"destination": "Wildwood",
+"points": 4000
+},
+{
+"type": "dinner at",
+"destination": "Bolton Tarven",
+"points": 1000
+},
+{
+"type": "a spa day at",
+"destination": "Body Love",
+"points": 10000
+},
+{
+"type": "a spa day at",
+"destination": "Mistress Love",
+"points": 15000
+},
+{
+"type": "a spa day at",
+"destination": "Creature Comforts",
+"points": 13000
+},
+{
+"type": "a Gift Card to spend at",
+"destination": "Home Depot",
+"points": 7000
+},
+{
+"type": "a Gift Card to spend at",
+"destination": "Amazon",
+"points": 8000
+},
+{
+"type": "a Gift Card to spend at",
+"destination": "Tiffany's",
+"points": 9000
+},
+{
+"type": "the world as your",
+"destination": "oyster",
+"points": 100000000
+}
+];
 
-var points = 24800;
+
+
+var userRewardPoints = getRandomInt(100, 10000);
+var nextRewardRequiredPoints;
+var qualifyingRewards = [];
 
 var speechOutput = '';
 var reprompt;
@@ -80,18 +144,21 @@ var handlers = {
     },
 	'GetPointsIntent': function () {
         var accumulatedPoints = usersPoints();
-        console.log(data[1].reward.type);
         speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " Capital One rewards points.";
-        this.emit(':tell', speechOutput);
+        reprompt = "";
+        this.emit(':ask', speechOutput, reprompt);
     },
     'GetPointsToNextMilestone': function () {
-        speechOutput = "You need " + deficitRewards.toLocaleString('en-US') + " more points you can get a gift card for Tiffany's.";
+        var userAwards = usersRewards();
+        var deficitPoints = deficitRewardPoints();
+        speechOutput = "You need " + deficitRewards.toLocaleString('en-US') + " more points you can get " + userAwards[2];
         this.emit(':tell', speechOutput);
     },
     'GetRewardsIntent': function () {
         var accumulatedPoints = usersPoints();
-        var deficitRewards = nextReward();
-        speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " reward points, you can get a flight to Los Angeles or a spa treatment at Mistress Love. If you accumulate " + deficitRewards.toLocaleString('en-US') + " more points you can get a gift card for Tiffany's.";
+        var userAwards = usersRewards();
+        var deficitPoints = deficitRewardPoints();
+        speechOutput = "You have " + accumulatedPoints.toLocaleString('en-US') + " reward points, you can get " + userAwards[0] + " or " + userAwards[1] + ". If you accumulate " + deficitPoints.toLocaleString('en-US') + " more points you can get " + userAwards[2];
         this.emit(':tell', speechOutput);
     }
 };
@@ -99,20 +166,48 @@ var handlers = {
 // 3. Functions  =================================================================================================
 
 function usersPoints() {
-    return points;
+    return userRewardPoints;
 }
 
 function usersRewards () {
     var loops = 0;
-    var qualifyingRewards = [];
-    Object.keys(data.starSignDates).some( function(reward) {
-        if( qualifiesForReward(reward) && loops < 2) {
+    qualifyingRewards = [];
+    for (var i = 0; i < data.length; i++) {
+        if( qualifiesForReward( data[i].points ) && loops < 2) {
             loops += 1;
-            qualifyingRewards += reward;
+            qualifyingRewards.push(data[i].type + " " + data[i].destination);
         }
-    });
+    };
+    if ( qualifyingRewards.length == 0 ) {
+        qualifyingRewards.push("nothing");
+        qualifyingRewards.push("just happiness with your current level of points.");
+    }
+    for (var i = 0; i < data.length; i++) {
+        if( qualifiesForReward( data[i].points ) ) {
+        } else if ( loops < 3 ) {
+            loops += 1;
+            qualifyingRewards.push(data[i].type + " " + data[i].destination);
+            nextRewardRequiredPoints = data[i].points;
+        }
+    };
+    return qualifyingRewards;
 }
 
-function nextReward() {
-    return (points - 1100);
+function qualifiesForReward ( requiredPoints ) {
+    console.log("rp:" + requiredPoints);
+    if ( requiredPoints <= userRewardPoints ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function deficitRewardPoints() {
+    return (nextRewardRequiredPoints - userRewardPoints);
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
 }
