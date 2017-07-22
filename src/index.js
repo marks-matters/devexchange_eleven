@@ -91,9 +91,7 @@ var data = [
 }
 ];
 
-
-
-var userRewardPoints = getRandomInt(100, 10000);
+var userRewardPoints = getRandomInt(1000, 100000);
 var nextRewardRequiredPoints;
 var qualifyingRewards = [];
 
