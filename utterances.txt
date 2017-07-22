@@ -1,7 +1,8 @@
 Intents and Utterances
 
+1. GetAccountListIntent
 
-1. GetPointsIntent
+2. GetPointsIntent
 
 Utterances:
 How many points do I have
@@ -11,8 +12,7 @@ Tell me how many reward points I have
 What is my reward status
 
 
-
-2. GetRewardsIntent
+3. GetRewardsIntent
 
 Utterances:
 what rewards can I get
