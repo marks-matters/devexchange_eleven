@@ -12,7 +12,7 @@ var data = [
 {
 "type": "a flight to",
 "destination": "Denver",
-"points": 25000
+"points": 26000
 },
 {
 "type": "a flight to",
@@ -22,7 +22,7 @@ var data = [
 {
 "type": "a flight to",
 "destination": "New York",
-"points": 25000
+"points": 24000
 },
 {
 "type": "a flight to",
@@ -48,6 +48,11 @@ var data = [
 "type": "dinner at",
 "destination": "Wildwood",
 "points": 4000
+},
+{
+"type": "dinner at",
+"destination": "Chef Barbara Lynch's French-Italian hybrid cuisine, Menton,",
+"points": 6000
 },
 {
 "type": "dinner at",
@@ -122,8 +127,9 @@ exports.handler = function(event, context, callback) {
 var handlers = {
 
 	////////////  Standard Intents  ///////////////
-	
+
     'LaunchRequest': function () {
+          userRewardPoints = getRandomInt(1000, 50000);
           this.emit(':ask', welcomeOutput, welcomeReprompt);
     },
 	'AMAZON.HelpIntent': function () {
@@ -143,9 +149,9 @@ var handlers = {
         speechOutput = 'Goodbye';
         this.emit(':tell', speechOutput);
     },
-    
+
     ///////////  App-specific Intents  ////////////
-    
+
 	'GetAccountsListIntent': function () {
         speechOutput = "You have a Visa and a Platinum Visa account.";
         reprompt = "";
@@ -179,6 +185,7 @@ function usersPoints() {
 }
 
 function usersRewards () {
+    data.sort(function(a, b){return -1 * (a.points - b.points)});
     var loops = 0;
     qualifyingRewards = [];
     for (var i = 0; i < data.length; i++) {
@@ -191,6 +198,7 @@ function usersRewards () {
         qualifyingRewards.push("nothing");
         qualifyingRewards.push("just happiness with your current level of points.");
     }
+    data.sort(function(a, b){return (a.points - b.points)});
     for (var i = 0; i < data.length; i++) {
         if( qualifiesForReward( data[i].points ) ) {
         } else if ( loops < 3 ) {
@@ -203,7 +211,6 @@ function usersRewards () {
 }
 
 function qualifiesForReward ( requiredPoints ) {
-    console.log("rp:" + requiredPoints);
     if ( requiredPoints <= userRewardPoints ) {
         return true;
     } else {
